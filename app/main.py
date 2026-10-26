@@ -5,7 +5,7 @@ from app.customer import Customer
 from app.shop import Shop
 
 
-def shop_trip():
+def shop_trip() -> None:
     config_path = Path(__file__).with_name("config.json")
     with config_path.open("r", encoding="utf-8") as config_file:
         config = json.load(config_file)

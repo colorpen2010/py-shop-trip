@@ -1,13 +1,19 @@
 import datetime
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from app.customer import Customer
 
 
 class Shop:
-    def __init__(self, name, location, products):
+    def __init__(
+        self, name: str, location: list[float], products: dict[str, float]
+    ) -> None:
         self.name = name
         self.location = location
         self.products = products
 
-    def purchase_cost(self, product_cart):
+    def purchase_cost(self, product_cart: dict[str, int]) -> float | None:
         if any(product not in self.products for product in product_cart):
             return None
         return sum(
@@ -15,7 +21,7 @@ class Shop:
             for product, quantity in product_cart.items()
         )
 
-    def sell_products(self, customer):
+    def sell_products(self, customer: Customer) -> None:
         total = self.purchase_cost(customer.product_cart)
         if total is None:
             return
